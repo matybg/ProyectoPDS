@@ -1,0 +1,44 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from DirectorService WSDL service -->
+
+  <service name="Director" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://business"/>
+      <parameter name="wsdlServiceElement" value="DirectorService"/>
+      <parameter name="schemaQualified" value="http://business"/>
+      <parameter name="wsdlServicePort" value="Director"/>
+      <parameter name="className" value="business.DirectorSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="Director"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="obtenerPacientesMasAtendido" qname="operNS:obtenerPacientesMasAtendido" xmlns:operNS="http://business" returnQName="retNS:obtenerPacientesMasAtendidoReturn" xmlns:retNS="http://business" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:f1" xmlns:pns="http://business" type="tns:dateTime" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:f2" xmlns:pns="http://business" type="tns:dateTime" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="obtenerPorcentajeOcupacionMedico" qname="operNS:obtenerPorcentajeOcupacionMedico" xmlns:operNS="http://business" returnQName="retNS:obtenerPorcentajeOcupacionMedicoReturn" xmlns:retNS="http://business" returnType="rtns:int" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:idMedico" xmlns:pns="http://business" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:fecha1" xmlns:pns="http://business" type="tns:dateTime" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:fecha2" xmlns:pns="http://business" type="tns:dateTime" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="obtenerPorcentajeOcupacionBox" qname="operNS:obtenerPorcentajeOcupacionBox" xmlns:operNS="http://business" returnQName="retNS:obtenerPorcentajeOcupacionBoxReturn" xmlns:retNS="http://business" returnType="rtns:int" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:idBox" xmlns:pns="http://business" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:fecha1" xmlns:pns="http://business" type="tns:dateTime" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:fecha2" xmlns:pns="http://business" type="tns:dateTime" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="obtenerBoxs" qname="operNS:obtenerBoxs" xmlns:operNS="http://business" returnQName="retNS:obtenerBoxsReturn" xmlns:retNS="http://business" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="obtenerMedicos" qname="operNS:obtenerMedicos" xmlns:operNS="http://business" returnQName="retNS:obtenerMedicosReturn" xmlns:retNS="http://business" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <parameter name="allowedMethods" value="obtenerPorcentajeOcupacionMedico obtenerBoxs obtenerPacientesMasAtendido obtenerPorcentajeOcupacionBox obtenerMedicos"/>
+
+  </service>
+</deployment>

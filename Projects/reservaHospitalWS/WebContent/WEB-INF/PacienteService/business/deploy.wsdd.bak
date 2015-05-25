@@ -1,0 +1,36 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from PacienteService WSDL service -->
+
+  <service name="Paciente" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://business"/>
+      <parameter name="wsdlServiceElement" value="PacienteService"/>
+      <parameter name="schemaQualified" value="http://business"/>
+      <parameter name="wsdlServicePort" value="Paciente"/>
+      <parameter name="className" value="business.PacienteSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="Paciente"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="obtenerEspecialidad" qname="operNS:obtenerEspecialidad" xmlns:operNS="http://business" returnQName="retNS:obtenerEspecialidadReturn" xmlns:retNS="http://business" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="obtenerMedicosDeUnaEspecialidad" qname="operNS:obtenerMedicosDeUnaEspecialidad" xmlns:operNS="http://business" returnQName="retNS:obtenerMedicosDeUnaEspecialidadReturn" xmlns:retNS="http://business" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:IdEspecialidad" xmlns:pns="http://business" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="buscarHoraAPS" qname="operNS:buscarHoraAPS" xmlns:operNS="http://business" returnQName="retNS:buscarHoraAPSReturn" xmlns:retNS="http://business" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:IdMedico" xmlns:pns="http://business" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:fecha1" xmlns:pns="http://business" type="tns:dateTime" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:fecha2" xmlns:pns="http://business" type="tns:dateTime" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="obtenerEspecialidad buscarHoraAPS obtenerMedicosDeUnaEspecialidad"/>
+
+  </service>
+</deployment>
